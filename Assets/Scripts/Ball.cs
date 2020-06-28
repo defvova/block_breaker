@@ -11,16 +11,17 @@ public class Ball : MonoBehaviour
 
     Vector2 paddleToBallVector;
     Rigidbody2D rb;
+    new AudioSource audio;
 
     bool hasStoped = true;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
         paddleToBallVector = transform.position - paddle1.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (hasStoped)
@@ -43,5 +44,11 @@ public class Ball : MonoBehaviour
     {
         Vector2 paddlePos = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
         transform.position = paddlePos + paddleToBallVector;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!hasStoped)
+            audio.Play();
     }
 }
