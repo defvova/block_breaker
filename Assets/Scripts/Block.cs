@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [SerializeField] int maxHits = 1;
     [SerializeField] AudioClip breakSound;
     [SerializeField] GameObject blockSparklesVFX;
     [SerializeField] Sprite[] hitSprites;
@@ -13,11 +12,12 @@ public class Block : MonoBehaviour
     Level level;
     GameStatus gameStatus;
     int timesHit = 0;
+    int maxHits;
 
     private void Start()
     {
         gameStatus = FindObjectOfType<GameStatus>();
-
+        maxHits = hitSprites.Length + 1;
         CountBreakableBlocks();
     }
 

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] Paddle paddle1;
     [SerializeField] float xPush = 2f;
     [SerializeField] float yPush = 15f;
+    [SerializeField] float randomFactor = 0.5f;
 
     Vector2 paddleToBallVector;
     Rigidbody2D rb;
@@ -19,6 +17,7 @@ public class Ball : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         audio = GetComponent<AudioSource>();
+
         paddleToBallVector = transform.position - paddle1.transform.position;
     }
 
@@ -49,6 +48,16 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!hasStoped)
+        {
+            RbRandomVelocity();
             audio.Play();
+        }
+    }
+
+    private void RbRandomVelocity()
+    {
+        float randVal = Random.Range(0.0f, randomFactor);
+        Vector2 velocityTweak = new Vector2(randVal, randVal);
+        rb.velocity += velocityTweak;
     }
 }
