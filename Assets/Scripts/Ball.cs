@@ -5,7 +5,7 @@ public class Ball : MonoBehaviour
     [SerializeField] Paddle paddle1;
     [SerializeField] float xPush = 2f;
     [SerializeField] float yPush = 15f;
-    [SerializeField] float randomFactor = 0.5f;
+    [SerializeField] float randomFactor = 0.8f;
 
     Vector2 paddleToBallVector;
     Rigidbody2D rb;
